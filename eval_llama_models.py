@@ -66,7 +66,7 @@ A) {row["options"][0]}
 B) {row["options"][1]}
 C) {row["options"][2]}
 D) {row["options"][3]}
-Answer: """
+"""
 
 def load_data ():
     df = pd.read_parquet("race_high_test")
