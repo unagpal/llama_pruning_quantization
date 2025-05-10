@@ -338,7 +338,7 @@ def run_all_exp():
     get_pruned_responses()
     get_pruned_responses(8, high_compression=True)
     get_pruned_responses(4, high_compression=True)
-    plot_pruning_accuracies()
     cache_gptq_responses()
+    plot_pruning_accuracies()
     plot_quant_pruning_accuracies()
     plot_quantization_accuracy()
