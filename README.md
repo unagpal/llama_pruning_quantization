@@ -101,20 +101,25 @@ python3 -c "from eval_llama_acc import run_all_exp; run_all_exp()"
 
 ### E. Quickstart: Minimum Reproducible Result
 
-To reproduce our minimum reported result (e.g., XX.XX% accuracy), run:
+To reproduce the result tables from section 3, run:
 
 ```bash
 # Step 1: Set up environment
-pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements_reprod.txt --extra-index-url https://download.pytorch.org/whl/cu128
 
-# Step 2: Download dataset
-bash scripts/download_dataset.sh  # if applicable
+# Step 2: Cache Llama model and calculate GPTQ-quantized models
+python cache_llama_models.py
+python - << 'EOF'
+from gptq import cache_gptq_models
+cache_gptq_models()
+EOF
 
-# Step 3: Run training (or skip if checkpoint is provided)
-python train.py --config configs/default.yaml
-
-# Step 4: Evaluate
-python eval.py --weights checkpoints/best_model.pth
+# Step 3: Run performance and accuracy experiments including quantization + pruning
+python3 -c "from eval_llama_quantization_perf_mem import run_all_experiments; run_all_experiments()"
+python3 -c "from eval_llama_acc import run_all_exp; run_all_exp()"
 ```
 
 ---
