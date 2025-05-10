@@ -6,6 +6,8 @@ from torch.profiler import profile, ProfilerActivity
 from torch.nn.utils import prune
 import numpy as np
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 """
 Custom linear layer with L1 structured input pruning that shrinks 
 size of matmul
