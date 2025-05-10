@@ -77,7 +77,7 @@ View training and evaluation metrics here: Wandb Dashboard Link
 
 No model training is included in this repo.
 
-To run GPTQ quantization on LLAMA, run the following within environment venv created in step A.
+To run GPTQ quantization on LLAMA, run the following within virtual environment venv from step A:
 ```bash
 python cache_llama_models.py
 python - << 'EOF'
