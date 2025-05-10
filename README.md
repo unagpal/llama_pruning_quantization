@@ -75,9 +75,15 @@ View training and evaluation metrics here: Wandb Dashboard Link
 
 ### C. Specify for Training or For Inference or if Both 
 
-To train the model from scratch:
+No model training is included in this repo.
+
+To run GPTQ quantization on LLAMA, run the following within environment venv created in step A.
 ```bash
-python train.py --config configs/default.yaml
+python cache_llama_models.py
+python - << 'EOF'
+from gptq import cache_gptq_models
+cache_gptq_models()
+EOF
 ```
 
 ---
@@ -86,7 +92,7 @@ python train.py --config configs/default.yaml
 
 To evaluate the trained model:
 ```bash
-python eval.py --weights checkpoints/best_model.pth
+xxxx
 ```
 
 ---
