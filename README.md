@@ -101,7 +101,7 @@ python3 -c "from eval_llama_acc import run_all_exp; run_all_exp()"
 
 ### E. Quickstart: Minimum Reproducible Result
 
-To reproduce the result tables from section 3, run:
+To reproduce the result tables from the above Final Results Summary, run:
 
 ```bash
 # Step 1: Set up environment
