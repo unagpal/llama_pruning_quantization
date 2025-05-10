@@ -30,10 +30,12 @@ Summary of performance and accuracy results (where '8 bit pruned' uses 35% linea
 | Model              | Median Latency (ms) | Median Tokens/sec | Peak Memory Allocated (GB) | RACE-H Accuracy |
 |--------------------|---------------------|-------------------|----------------------------|-----------------|
 | 4 bit              | 25.95               | 43.2              | 2.40                       | 62.6%           |
-| 4 bit pruned       | 25.93               | 43.1              | 3.10                       | 53.3%           |
+| 4 bit pruned       | 25.93               | 43.1              | 3.10*                      | 53.3%           |
 | 8 bit              | 25.94               | 43.2              | 3.82                       | 62.0%           |
-| 8 bit pruned       | 25.95               | 43.5              | 4.33                       | 52.8%           |
+| 8 bit pruned       | 25.95               | 43.5              | 4.33*                      | 52.8%           |
 | bf16 (full model)  | 30.78               | 38.1              | 6.56                       | 69.0%           |
+
+*: Lower memory usage for these models (below that of corresponding un-pruned models) should be achievable with custom Cuda kernels for L1 structured linear layer pruning.
 
 Summary of maximum pruning after GPTQ quantization that preserves at least 50% RACE-H accuracy: 
 
