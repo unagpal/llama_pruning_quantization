@@ -47,7 +47,3 @@ def cache_model_int8():
 
 cache_model_bf16()
 logging.info("BF16 model is cached")
-cache_model_nf4()
-logging.info("NF4 model is cached")
-cache_model_int8()
-logging.info("INT8 model is cached")
