@@ -1,6 +1,6 @@
 
-from llama_pruning_perf_mem import load_model_bf16_bmk
-from eval_llama_models import race_entry_to_prompt, load_data
+from llama import load_model_bf16_bmk
+from race import load_data
 from gptq import load_llama_gptq
 import pandas as pd
 import numpy as np
@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 from torch.profiler import profile, ProfilerActivity
 import matplotlib.pyplot as plt
-from llama_pruning_perf_mem import L1PrunedInputLinear
+from pruning import L1PrunedInputLinear
 
 device = "cuda" if torch.cuda.is_available() else "cpu" 
 
