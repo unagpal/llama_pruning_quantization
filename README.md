@@ -90,9 +90,11 @@ EOF
 
 ### D. Evaluation
 
-To evaluate the trained model:
+To evaluate the throughput, latency, memory usage, and accuracy of the quantized and pruned models, run the following. Note that the commands in part C are a prerequisite.
 ```bash
-xxxx
+python3 -c "from eval_llama_pruning_perf_mem import run_all_exp; run_all_exp()"
+python3 -c "from eval_llama_quantization_perf_mem import run_all_experiments; run_all_experiments()"
+python3 -c "from eval_llama_acc import run_all_exp; run_all_exp()"
 ```
 
 ---
