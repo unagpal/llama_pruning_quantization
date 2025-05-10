@@ -56,9 +56,12 @@ Device used: 1 H100 GPU with ARM CPUs (Lambda Labs GH200 instance).
 
 ### A. Requirements
 
-Install dependencies:
+Inside the llama_pruning_quantization directory, install dependencies as follows:
 ```bash
-pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements_reprod.txt --extra-index-url https://download.pytorch.org/whl/cu128
 ```
 
 ---
