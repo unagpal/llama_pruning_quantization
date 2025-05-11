@@ -75,7 +75,7 @@ View training and evaluation metrics here: Wandb Dashboard Link
 
 ### C. Specify for Training or For Inference or if Both 
 
-No model training is included in this repo.
+No model training is included in this project: only inference, post-training quantization, and pruning.
 
 To run GPTQ quantization on LLAMA, run the following within virtual environment venv from step A:
 ```bash
