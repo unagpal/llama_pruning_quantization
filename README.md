@@ -127,18 +127,33 @@ python3 -c "from eval_llama_acc import run_all_exp; run_all_exp()"
 
 ## 5. Notes
 
-Dataset: RACE-H test set (reading comprehension): https://huggingface.co/datasets/ehovy/race
+Dataset: RACE-H test set (reading comprehension): https://huggingface.co/datasets/ehovy/race.
 
 cache_llama_models.py: Retrieve LLAMA models from Hugging Face and cache to enhance speed of future model loads
 
 cache_opt_models.py: Retrieve OPT models from Hugging Face and cache to enhance speed of future model loads
 
-eval_llama_models.py: Evaluate throughput, latency, and accuracy of LLAMA models with different pruning/quantization approaches
+eval_llama_acc.py: Evaluate accuracy of LLAMA models in RACE-H high school reading comprehension questions. Measure accuracy for full BF16 model, GPTQ quantized models, pruned models, and quantized + pruned models.
 
-eval_opt_models.py: Evaluate throughput, latency, and accuracy of OPT models with different pruning/quantization approaches
+eval_llama_pruning_perf_mem.py: Measure throughput, latency, memory usage, and accuracy of pruned versions of the BF16 Llama-3.2-3B model, using L1 structured pruning for linear layers.
 
-TODO add remaining scripts
-TODO mentioned where trained models are saved
+eval_llama_quantization_perf_mem.py: Measure throughput, latency, memory usage, and accuracy of GPTQ quantized versions of the Llama-3.2-3B model, and quantized versions that are subsequently pruned.
+
+gptq.py: Utility functions to run GPTQ quantization using Llama
+
+llama.py: Functions to load Llama models and tokenizers.
+
+opt.py: Functions to load opt models and tokenizers.
+
+pruning.py: Custom Pytorch linear layers that implement L1 structured pruning with reduced size matmul. (Used because torch ln_structured pruning does not reduce matmul size).
+
+race.py: Data loader for RACE-H high school reading comprehension dataset.
+
+requirements_pruning.txt: Requirements file for environment used to run pruning experiments.
+
+requirements_quantization.txt: Requirements file for environment used to run quantization experiments.
+
+requirements_reprod.txt: Requirements file for simple environment setup. This environment works for all experiments.
 
 Contact information: ugnagpal@gmail.com
 
