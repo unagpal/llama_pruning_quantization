@@ -72,7 +72,7 @@ def load_bf16_model_l1_structured_pruning_shrink(compression_ratio: float, prune
     model.eval()
     return model, tokenizer
 
-# For each pruning configuration, measure latency (time to first token) and throughput (tokens per second)
+# For each BF16 pruning configuration, measure latency (time to first token) and throughput (tokens per second)
 def run_bf16_prune_perf_exp(mode: str, compression_ratio: float) -> pd.DataFrame:
     THROUGHPUT_TOKENS = 100
     N_SAMPLES = 10
@@ -124,6 +124,7 @@ def run_bf16_prune_perf_exp(mode: str, compression_ratio: float) -> pd.DataFrame
     data["compression_ratio"] = compression_ratio
     return data
 
+# Iterate through various BF16 compression ratios and measure impact on inference efficiency
 def run_all_bf16_prune_perf_exp() -> pd.DataFrame:
     out_dfs = []
     compression_ratios = [0.001, 0.01, 0.1, 0.5]
@@ -184,6 +185,7 @@ def run_bf16_prune_mem_exp(mode: str, compression_ratio: float) -> pd.DataFrame:
     data["compression_ratio"] = compression_ratio
     return data
 
+# Evaluate memory usage of pruned models for several BF16 compression ratios
 def run_all_bf16_prune_mem_exp() -> pd.DataFrame:
     out_dfs = []
     compression_ratios = [0.001, 0.01, 0.1, 0.5]
