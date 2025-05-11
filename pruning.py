@@ -10,7 +10,8 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 """
 Custom linear layer with L1 structured input pruning that shrinks 
-size of matmul
+size of matmul. Used because torch ln_structured pruning does not 
+reduce matmul size.
 """
 class L1PrunedInputLinear (nn.Module):
     def __init__(self, linear: nn.Linear, compression_ratio: float):
@@ -35,7 +36,8 @@ class L1PrunedInputLinear (nn.Module):
 
 """
 Custom linear layer with L1 structured output pruning that shrinks
-size of matmul
+size of matmul. Used because torch ln_structured pruning does not 
+reduce matmul size.
 """
 class L1PrunedOutputLinear (nn.Module):
     def __init__(self, linear: nn.Linear, compression_ratio: float):
