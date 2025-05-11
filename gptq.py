@@ -21,12 +21,14 @@ def run_gptq (nbits: int):
     model.eval()
     return model, tokenizer
 
+# Script to compute and cache GPTQ quantized Llama models to local file system
 def cache_gptq_models() -> None:
     model_8bit, tokenizer = run_gptq(8)
     model_8bit.save_pretrained(f"{MODEL_PATH}8bit", safe_serialization=True)
     model_4bit, tokenizer = run_gptq(4)
     model_4bit.save_pretrained(f"{MODEL_PATH}4bit", safe_serialization=True)
 
+# Load GPTQ quantized Llama model and associated tokenizer
 def load_llama_gptq (nbits: int):
     if nbits not in [4, 8]:
         raise ValueError("Only 4 and 8 bit quantized models are cached")
