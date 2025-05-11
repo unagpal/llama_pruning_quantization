@@ -5,6 +5,7 @@ import logging
 MODEL = "facebook/opt-1.3b"
 MODEL_PATH = "./opt_models/"
 
+# Load float16 OPT model from local file system
 def load_model_f16():
     model_dir = f"{MODEL_PATH}f16"
     tokenizer = AutoTokenizer.from_pretrained(model_dir, use_fast=True)
