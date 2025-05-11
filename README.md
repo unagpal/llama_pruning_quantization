@@ -78,7 +78,7 @@ Wandb dashboard has quantized models in artifacts and all experiment results in 
 
 No model training is included in this project: only inference, post-training quantization, and pruning.
 
-To run GPTQ quantization on LLAMA, run the following within virtual environment venv from step A:
+To run GPTQ quantization on LLAMA, run the following shell commands within virtual environment venv from step A:
 ```bash
 python cache_llama_models.py
 python - << 'EOF'
@@ -91,7 +91,7 @@ EOF
 
 ### D. Evaluation
 
-To evaluate the throughput, latency, memory usage, and accuracy of the quantized and pruned models, run the following. Note that the commands in part C are a prerequisite.
+To evaluate the throughput, latency, memory usage, and accuracy of the quantized and pruned models, run the following shell commands. Note that the commands in part C are a prerequisite.
 ```bash
 python3 -c "from eval_llama_pruning_perf_mem import run_all_exp; run_all_exp()"
 python3 -c "from eval_llama_quantization_perf_mem import run_all_experiments; run_all_experiments()"
@@ -102,7 +102,7 @@ python3 -c "from eval_llama_acc import run_all_exp; run_all_exp()"
 
 ### E. Quickstart: Minimum Reproducible Result
 
-To reproduce the result tables from the above Final Results Summary, run:
+To reproduce the result tables from the above Final Results Summary, run the following in the llama_pruning_quantization directory:
 
 ```bash
 # Step 1: Set up environment
