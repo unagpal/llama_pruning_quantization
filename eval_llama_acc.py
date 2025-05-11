@@ -45,8 +45,8 @@ def load_bf16_model_structured_pruning_zeros(compression_ratio: float, prune_typ
     return model, tokenizer
 
 """
-Standard L1 structured pruning for linear layers: masks pruned weights to 0,
-does not shrink matmul size
+Standard L1 structured pruning for linear layers applied to quantized models: 
+masks pruned weights to 0, does not shrink matmul size
 """
 def load_quantized_model_structured_pruning_zeros(compression_ratio: float, prune_type: str, nbits: int, norm_type: int = 1):
     if prune_type == "input":
@@ -72,6 +72,7 @@ def load_quantized_model_structured_pruning_zeros(compression_ratio: float, prun
     model.eval()
     return model, tokenizer
 
+# Measure accuracy, latency, and throughput for Llama BF16 model inference
 def run_bf16_exp() -> None:
     THROUGHPUT_TOKENS = 100
     N_SAMPLES = 100
@@ -121,6 +122,7 @@ def run_bf16_exp() -> None:
     plt.savefig("tokens_per_sec.png")
     data.to_parquet("bf16_result.parquet")
 
+# Save RACE-H reading comprehension answers from GPTQ quantized Llama models
 def cache_gptq_responses() -> None:
     THROUGHPUT_TOKENS = 100
     N_SAMPLES = 100
@@ -141,6 +143,7 @@ def cache_gptq_responses() -> None:
         data["response"] = text_responses
         data.to_parquet(f"{nbits}bit_result_responses.parquet")
 
+# Save RACE-H reading comprehension answers from pruned Llama models
 def get_pruned_responses(nbits: int = 16, high_compression: bool = False):
     if nbits not in [4, 8, 16]:
         raise ValueError("Only nbits values of 4, 8, and 16 are supported")
@@ -175,6 +178,7 @@ def get_pruned_responses(nbits: int = 16, high_compression: bool = False):
             data.to_parquet(out_path)
             print(f"done with {compression_ratio},{prune_type}")
 
+# Regex method to extract LLM multiple choice answer from its unstructured text output
 def extract_llm_answer(response: str) -> str | None:
     pattern = re.compile(
         r'(?:'                      
@@ -194,6 +198,7 @@ def extract_llm_answer(response: str) -> str | None:
         return extracted_answer
     return ""
 
+# Measure LLM accuracy on RACE-H reading comprehension questions
 def eval_llm_accuracy (df: pd.DataFrame) -> tuple[float, float]:
     df["llm_answer"] = df["response"].apply(extract_llm_answer)
     df["answer"] = df["answer"].str.lower()
@@ -203,6 +208,7 @@ def eval_llm_accuracy (df: pd.DataFrame) -> tuple[float, float]:
     prop_answered = llm_ans_count / len(df)
     return acc, prop_answered
 
+# Plot effect of pruning compression ratio on RACE-H model accuracy
 def plot_pruning_accuracies ():
     dfs = [pd.read_parquet("bf16_result.parquet")] * 2 + [pd.read_parquet(
         "8bit_result_responses.parquet")] * 2 + [pd.read_parquet("4bit_result_responses.parquet")] * 2
@@ -265,7 +271,7 @@ def plot_pruning_accuracies ():
     plt.legend()
     plt.savefig("all_prop_answered.png")
 
-# Plot accuracy for GPTQ quantization followed by pruning
+# Plot RACE-H accuracy for GPTQ quantization followed by pruning
 def plot_quant_pruning_accuracies ():
     dfs = [pd.read_parquet("8bit_result_responses.parquet")] * 2 + [pd.read_parquet("4bit_result_responses.parquet")] * 2
     all_compression_ratios = [0] * 4
@@ -312,6 +318,7 @@ def plot_quant_pruning_accuracies ():
     plt.legend()
     plt.savefig("quant_pruning_acc.png")
 
+# Generate a chart showing the impact of GPTQ quantization on RACE-H model accuracy
 def plot_quantization_accuracy() -> None:
     bf16 = pd.read_parquet("bf16_result.parquet")
     gptq8 = pd.read_parquet("8bit_result_responses.parquet")
@@ -333,6 +340,7 @@ def plot_quantization_accuracy() -> None:
     plt.tight_layout()
     plt.savefig("quant_acc")
 
+# Script to run all experiments and plot accuracy results
 def run_all_exp():
     run_bf16_exp()
     get_pruned_responses()
