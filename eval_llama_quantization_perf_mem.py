@@ -15,7 +15,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 """
 Prune GPTQ-quantized LLAMA models the maximum possible while retaining
-50% RACE-H reading comprehension accuracy
+at least 50% RACE-H reading comprehension accuracy
 """
 def load_optimal_quantized_model_l1_structured_pruning_shrink(nbits: int):
     # Maximum compression ratios that remain above 50% accuracy by nbits
@@ -88,6 +88,7 @@ def run_quantization_perf_exp(mode: str) -> pd.DataFrame:
     data["mode"] = mode
     return data
 
+# Cache quantized model efficiency for various quantization and quantization + pruning setups
 def run_all_quantization_perf_exp() -> None:
     out_dfs = []
     for mode in ["normal", "8bitpruned", "4bitpruned", "8bit", "4bit"]:
@@ -145,6 +146,7 @@ def run_quantization_mem_exp(mode: str) -> pd.DataFrame:
     data["mode"] = mode
     return data
 
+# Cache peak Llama inference memory usage for various quantization and quantization + pruning setups
 def run_all_quantization_mem_exp() -> None:
     out_dfs = []
     for mode in ["normal", "8bitpruned", "4bitpruned", "8bit", "4bit"]:
@@ -172,6 +174,7 @@ def triple_bar_quant_chart (stats: pd.DataFrame, title: str, ylabel: str, filena
     plt.tight_layout()
     plt.savefig(f"{filename}.png")
 
+# Illustrate impact of quantization on latency, throughput, and memory usage
 def plot_quantization_exp_results () -> None:
     df = pd.read_parquet("quant_perf.parquet")
     df.loc[df["mode"] == "normal", "mode"] = "bf16"
@@ -186,6 +189,7 @@ def plot_quantization_exp_results () -> None:
     mem_stats = df.groupby("mode")["peak_bytes"].quantile([0.2, 0.5, 0.8]).unstack()
     triple_bar_quant_chart(mem_stats, "GPTQ quantization impact on Llama-3.2-3B peak inference memory allocation (GB) distribution", "Peak inference memory usage (GB)", "quant_mem_usage")
 
+# Run all quantization and quantization + pruning latency, throughput, and mmemory usage experiments
 def run_all_experiments() -> None:
     run_all_quantization_mem_exp()
     run_all_quantization_perf_exp()
