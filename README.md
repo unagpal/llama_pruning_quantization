@@ -68,8 +68,9 @@ pip install -r requirements_reprod.txt --extra-index-url https://download.pytorc
 
 B. Wandb Dashboard
 
-View training and evaluation metrics here: Wandb Dashboard Link
-(Replace with actual link)
+View training and evaluation metrics here: [Wandb Dashboard Link](https://wandb.ai/unagpal-columbia-university/hpml_spring_2025_pruning_quantization/workspace?)
+
+Wandb dashboard has quantized models in artifacts and all experiment results in the Workspace Media and Tables sections.
 
 ---
 
