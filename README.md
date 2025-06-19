@@ -1,9 +1,4 @@
-# HPML Project: Quantization and pruning for efficient Llama-3.2-3B inference in reading comprehension tasks
-
-## Team Information
-- **Team Name**: Team FastLlama
-- **Members**:
-  - Udai Nagpal (ugn2000)
+# Quantization and pruning for efficient Llama-3.2-3B inference in reading comprehension tasks
 
 ---
 
