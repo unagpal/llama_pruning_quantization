@@ -2,9 +2,9 @@
 
 ---
 
-## 1. Problem Statement
+## 1. Overview
 
-Apply post-training quantization, pruning (without retraining), and quantization followed by pruning (without retraining) to maximize tokens per second, and minimize latency and peak memory usage, of Llama-3.2-3B inference while preserving over 50% accuracy in RACE-H high school reading comprehension questions.
+We apply post-training quantization, pruning (without retraining), and quantization followed by pruning (without retraining) to maximize tokens per second, and minimize latency and peak memory usage, of Llama-3.2-3B inference while preserving over 50% accuracy in RACE-H high school reading comprehension questions.
 
 ---
 
